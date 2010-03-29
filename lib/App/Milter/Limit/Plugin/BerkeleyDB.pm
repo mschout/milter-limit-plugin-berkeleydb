@@ -6,8 +6,6 @@ use strict;
 use base qw(App::Milter::Limit::Plugin Class::Accessor);
 use App::Milter::Limit::Log;
 use BerkeleyDB qw(DB_CREATE DB_INIT_MPOOL DB_INIT_CDB);
-use File::Path qw(mkpath);
-use Fatal qw(mkpath);
 
 __PACKAGE__->mk_accessors(qw(_db));
 
@@ -30,6 +28,7 @@ sub init_defaults {
     );
 }
 
+# open BerkeleyDB handles in child_init handler.
 sub child_init {
     my $self = shift;
 
