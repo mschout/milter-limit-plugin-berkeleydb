@@ -112,3 +112,10 @@ The database filename (default bdb-stats.db)
 The file mode for the database files (default 0644).
 
 =back
+
+=begin Pod::Coverage
+
+child_init
+init_defaults
+
+=end Pod::Coverage
