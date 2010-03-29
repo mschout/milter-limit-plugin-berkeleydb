@@ -1,43 +1,10 @@
-=head1 NAME
+package App::Milter::Limit::Plugin::BerkeleyDB;
 
-Milter::Limit::Plugin::BerkeleyDB - Berkeley DB backend for Milter::Limit
-
-=head1 SYNOPSIS
-
- my $milter = Milter::Limit->instance('BerkeleyDB');
-
-=head1 DESCRIPTION
-
-This module implements the C<Milter::Limit> backend using a BerkeleyDB data
-store.
-
-=head1 CONFIGURATION
-
-The C<[driver]> section of the configuration file must specify the following items:
-
-=over 4
-
-=item home
-
-The directory where the database files should be stored.
-
-=item file
-
-The database filename
-
-=item mode [optional]
-
-The file mode for the database files (default 0644).
-
-=back
-
-=cut
-
-package Milter::Limit::Plugin::BerkeleyDB;
+# ABSTRACT: BerkeleyDB driver for App::Milter::Limit
 
 use strict;
-use base qw(Milter::Limit::Plugin Class::Accessor);
-use Milter::Limit::Log;
+use base qw(App::Milter::Limit::Plugin Class::Accessor);
+use App::Milter::Limit::Log;
 use BerkeleyDB qw(DB_CREATE DB_INIT_MPOOL DB_INIT_CDB);
 use File::Path qw(mkpath);
 use Fatal qw(mkpath);
@@ -49,7 +16,7 @@ sub init {
 
     $self->init_defaults;
 
-    Milter::Limit::Util::make_path($self->config_get('driver', 'home'));
+    App::Milter::Limit::Util::make_path($self->config_get('driver', 'home'));
 
     # db/env creation deferred until child_init
 }
@@ -66,7 +33,7 @@ sub init_defaults {
 sub child_init {
     my $self = shift;
 
-    my $conf = Milter::Limit::Config->section('driver');
+    my $conf = App::Milter::Limit::Config->section('driver');
 
     my $env = BerkeleyDB::Env->new(
         -Home  => $$conf{home},
@@ -86,7 +53,7 @@ sub child_init {
 sub query {
     my ($self, $from) = @_;
 
-    my $conf = Milter::Limit::Config->global;
+    my $conf = App::Milter::Limit::Config->global;
 
     my $db = $self->_db;
 
@@ -113,38 +80,35 @@ sub query {
     return $count;
 }
 
-=head1 SOURCE
+1;
 
-You can contribute or fork this project via github:
+__END__
 
-http://github.com/mschout/milter-limit
+=head1 SYNOPSIS
 
- git clone git://github.com/mschout/milter-limit.git
+ my $milter = App::Milter::Limit->instance('BerkeleyDB');
 
-=head1 AUTHOR
+=head1 DESCRIPTION
 
-Michael Schout E<lt>mschout@cpan.orgE<gt>
+This module implements the C<App::Milter::Limit> backend using a BerkeleyDB data
+store.
 
-=head1 COPYRIGHT & LICENSE
+=head1 CONFIGURATION
 
-Copyright 2009 Michael Schout.
-
-This program is free software; you can redistribute it and/or modify it under
-the terms of either:
+The C<[driver]> section of the configuration file must specify the following items:
 
 =over 4
 
-=item *
+=item home
 
-the GNU General Public License as published by the Free Software Foundation;
-either version 1, or (at your option) any later version, or
+The directory where the database files should be stored.
 
-=item *
+=item file [optional]
 
-the Artistic License version 2.0.
+The database filename (default bdb-stats.db)
+
+=item mode [optional]
+
+The file mode for the database files (default 0644).
 
 =back
-
-=cut
-
-1;
