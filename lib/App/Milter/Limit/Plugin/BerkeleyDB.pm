@@ -3,7 +3,9 @@ package App::Milter::Limit::Plugin::BerkeleyDB;
 # ABSTRACT: BerkeleyDB driver for App::Milter::Limit
 
 use strict;
+use warnings;
 use base qw(App::Milter::Limit::Plugin Class::Accessor);
+
 use App::Milter::Limit::Log;
 use BerkeleyDB qw(DB_CREATE DB_INIT_MPOOL DB_INIT_CDB);
 
