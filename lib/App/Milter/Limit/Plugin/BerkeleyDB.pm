@@ -1,3 +1,5 @@
+# COPYRIGHT
+
 package App::Milter::Limit::Plugin::BerkeleyDB;
 
 # ABSTRACT: BerkeleyDB driver for App::Milter::Limit
