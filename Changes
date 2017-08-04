@@ -1,7 +1,7 @@
 Revision history for App::Milter::Limit::Plugin::BerkeleyDB
 
 {{$NEXT}}
-    - add weaver.ini for Pod::Weaver
+    - use Dist::Zilla generated author-signature test
 
 0.51  2010-03-30
     - dzil: use my @MSCHOUT plugin bundle
