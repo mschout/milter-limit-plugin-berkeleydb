@@ -1,6 +1,8 @@
 Revision history for App::Milter::Limit::Plugin::BerkeleyDB
 
 {{$NEXT}}
+
+0.52  2017-08-04
     - use Dist::Zilla generated author-signature test
     - Kwalitee: enable warnings
     - include a smoke test
