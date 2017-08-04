@@ -93,7 +93,7 @@ __END__
 
 =head1 DESCRIPTION
 
-This module implements the C<App::Milter::Limit> backend using a BerkeleyDB data
+This module implements the L<App::Milter::Limit> backend using a BerkeleyDB data
 store.
 
 =head1 CONFIGURATION
@@ -102,17 +102,17 @@ The C<[driver]> section of the configuration file must specify the following ite
 
 =over 4
 
-=item home
+=item home [optional]
 
-The directory where the database files should be stored.
+The directory where the database files should be stored (default: C<state_dir> setting).
 
 =item file [optional]
 
-The database filename (default bdb-stats.db)
+The database filename (default: C<bdb-stats.db>)
 
 =item mode [optional]
 
-The file mode for the database files (default 0644).
+The file mode for the database files (default: C<0644>).
 
 =back
 
